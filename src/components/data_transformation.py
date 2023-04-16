@@ -10,8 +10,14 @@ import pickle
 from sklearn.linear_model import LinearRegression,Lasso,Ridge,ElasticNet
 from sklearn.metrics import r2_score,mean_absolute_error,mean_squared_error
 from src.utils import save_object
-
-
+from src.components.data_ingestion import DataIngestion
+from sklearn.impute import SimpleImputer ## HAndling Missing Values
+from sklearn.preprocessing import StandardScaler # HAndling Feature Scaling
+from sklearn.preprocessing import OrdinalEncoder # Ordinal Encoding
+## pipelines
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+ 
 @dataclass
 class DataTransformationConfig:
     preprocessor_obj_file_path = os.path.join('artifacts', 'preprocessor.pkl')
@@ -43,22 +49,22 @@ class DataTransformation:
             # Numerical Pipeline
             num_pipeline=Pipeline(
             steps=[
-            ('imputer',SimpleImputer(strategy='median')),
-            ('scaler',StandardScaler())
+                ('imputer',SimpleImputer(strategy='median')),
+                ('scaler',StandardScaler())
             ])
             
             # Categorigal Pipeline
             cat_pipeline=Pipeline(
             steps=[
-            ('imputer',SimpleImputer(strategy='most_frequent')),
-            ('ordinalencoder',OrdinalEncoder(categories=[cut_categories,color_categories,clarity_categories])),
-            ('scaler',StandardScaler())
+                ('imputer',SimpleImputer(strategy='most_frequent')),
+                ('ordinalencoder',OrdinalEncoder(categories=[cut_categories,color_categories,clarity_categories])),
+                ('scaler',StandardScaler())
             ])
             
             # Preprocessor Combine Two Pipelines
             preprocessor=ColumnTransformer([
-            ('num_pipeline',num_pipeline,numerical_columns),
-            ('cat_pipeline',cat_pipeline,categorical_columns)
+                ('num_pipeline',num_pipeline,numerical_columns),
+                ('cat_pipeline',cat_pipeline,categorical_columns)
             ])
             
             return preprocessor
@@ -66,53 +72,61 @@ class DataTransformation:
             
         except Exception as e:
             logging.info("Error in Data Transformation")
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)
         
-# Read Train & Test Data
-def initiate_data_transformation(self, train_path, test_path):
-    try:
+    # Read Train & Test Data
+    def initiate_data_transformation(self, train_path, test_path):
+        try:
         # Reading train & test data
-        train_df = pd.read_csv(train_path)
-        test_df = pd.read_csv(test_path)
+            train_df = pd.read_csv(train_path)
+            test_df = pd.read_csv(test_path)
         
-        logging.info("Read train & test data completed")
+            logging.info("Read train & test data completed")
         
-        logging.info(f"Train Dataframe Head:\n{train_df.head().to_string()}")
-        logging.info(f"Test Dataframe Head:\n{test_df.head().to_string()}")
-        logging.info("Obtaining processing Object")
+            logging.info(f"Train Dataframe Head:\n{train_df.head().to_string()}")
+            logging.info(f"Test Dataframe Head:\n{test_df.head().to_string()}")
+            logging.info("Obtaining processing Object")
         
-        preprocessing_obj = self.get_data_transformation_object()
+            preprocessing_obj = self.get_data_transformation_object()
         
-        target_column_name = 'price'
-        drop_columns = [target_column_name, 'id']
-        input_feature_train_df = train_df.drop(columns = drop_columns, axis = 1)
-        target_feature_train_df = train_df[target_column_name]
+            target_column_name = 'price'
+            drop_columns = [target_column_name, 'id']
+            input_feature_train_df = train_df.drop(columns = drop_columns, axis = 1)
+            target_feature_train_df = train_df[target_column_name]
         
-        input_feature_test_df = test_df.drop(columns=drop_columns, axis = 1)
-        target_feature_test_df = test_df[target_column_name]
+            input_feature_test_df = test_df.drop(columns=drop_columns, axis = 1)
+            target_feature_test_df = test_df[target_column_name]
         
-        ## Transforming Using preprocessor obj
-        input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
-        input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
+            ## Transforming Using preprocessor obj
+            input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
+            input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
         
-        logging.info("Applying preprocessing object on training & testing datasets")
+            logging.info("Applying preprocessing object on training & testing datasets")
         
         
-        train_arr = np.c_[input_feature_train_arr, np.array(target_feature_train_df)]
-        test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
+            train_arr = np.c_[input_feature_train_arr, np.array(target_feature_train_df)]
+            test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
         
-        save_object(
-            file_path = self.data_transformation_config.preprocessor_obj_file_path,
-            obj = preprocessing_obj
-        )
+            save_object(
+                file_path = self.data_transformation_config.preprocessor_obj_file_path,
+                obj = preprocessing_obj
+            )
         
-        logging.info("Preprocessor pickle file saved")
+            logging.info("Preprocessor pickle file saved")
         
-        return (
-            train_arr,
-            test_arr,
-            self.data_transformation_config.preprocessor_obj, file_path,
-        )
-    except Exception as e:
-        logging.info("Exception occured in the initiate_datatransformation")
-        raise CustomException(e, sys)
+            return (
+                train_arr,
+                test_arr,
+                self.data_transformation_config.preprocessor_obj_file_path
+            )
+            
+        except Exception as e:
+            logging.info("Exception occured in the initiate_datatransformation")
+            raise CustomException(e, sys)
+
+if __name__ == '__main__':
+    # create object of 'DataIngestion' class
+    obj = DataIngestion()
+    train_data_path, test_data_path = obj.initiate_data_ingestion()
+    data_transform = DataTransformation()
+    train_arr, test_arr,_ = data_transform.initiate_data_transformation(train_data_path, test_data_path)
