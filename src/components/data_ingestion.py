@@ -8,8 +8,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
-
-from src.components.data_transformation import DataTransformation 
+from src.components.data_transformation import DataTransformation
 from src.utils import save_object
 
 @dataclass
@@ -56,10 +55,4 @@ class DataIngestion:
             logging.info("Exception occurs at Data Ingestion")
             raise CustomException(e, sys)
         
-# Run "Data Ingestion Class"
 
-if __name__ == '__main__':
-    # create object of 'DataIngestion' class
-    obj = DataIngestion()
-    train_data_path, test_data_path = obj.initiate_data_ingestion()
-    

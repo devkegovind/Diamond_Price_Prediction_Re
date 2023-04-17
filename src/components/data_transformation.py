@@ -7,10 +7,8 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 import pickle
-from sklearn.linear_model import LinearRegression,Lasso,Ridge,ElasticNet
-from sklearn.metrics import r2_score,mean_absolute_error,mean_squared_error
 from src.utils import save_object
-from src.components.data_ingestion import DataIngestion
+
 from sklearn.impute import SimpleImputer ## HAndling Missing Values
 from sklearn.preprocessing import StandardScaler # HAndling Feature Scaling
 from sklearn.preprocessing import OrdinalEncoder # Ordinal Encoding
@@ -124,9 +122,9 @@ class DataTransformation:
             logging.info("Exception occured in the initiate_datatransformation")
             raise CustomException(e, sys)
 
-if __name__ == '__main__':
-    # create object of 'DataIngestion' class
-    obj = DataIngestion()
-    train_data_path, test_data_path = obj.initiate_data_ingestion()
-    data_transform = DataTransformation()
-    train_arr, test_arr,_ = data_transform.initiate_data_transformation(train_data_path, test_data_path)
+
+if __name__=='__main__':
+    obj= DataIngestion()
+    train_data_path,test_data_path=obj.initiate_data_ingestion()
+    data_transformation = DataTransformation()
+    train_arr, test_arr,_ = data_transformation.initiate_data_transformation(train_data_path,test_data_path)
