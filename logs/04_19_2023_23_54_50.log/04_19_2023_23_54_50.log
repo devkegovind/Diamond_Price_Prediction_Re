@@ -1,0 +1,10 @@
+[ 2023-04-19 23:54:53,130 ] 224 werkzeug - WARNING -  * Debugger is active!
+[ 2023-04-19 23:54:53,132 ] 224 werkzeug - INFO -  * Debugger PIN: 115-595-614
+[ 2023-04-19 23:54:55,812 ] 67 root - INFO - Dataframe Gathered
+[ 2023-04-19 23:54:55,812 ] 28 root - INFO - Exception occured in prediction
+[ 2023-04-19 23:54:55,827 ] 224 werkzeug - INFO - 127.0.0.1 - - [19/Apr/2023 23:54:55] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -
+[ 2023-04-19 23:54:55,853 ] 224 werkzeug - INFO - 127.0.0.1 - - [19/Apr/2023 23:54:55] "[36mGET /predict?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+[ 2023-04-19 23:54:55,857 ] 224 werkzeug - INFO - 127.0.0.1 - - [19/Apr/2023 23:54:55] "[36mGET /predict?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+[ 2023-04-19 23:54:55,871 ] 224 werkzeug - INFO - 127.0.0.1 - - [19/Apr/2023 23:54:55] "[36mGET /predict?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+[ 2023-04-19 23:54:55,900 ] 224 werkzeug - INFO - 127.0.0.1 - - [19/Apr/2023 23:54:55] "[36mGET /predict?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+[ 2023-04-19 23:56:23,507 ] 224 werkzeug - INFO -  * Detected change in 'D:\\Regression\\src\\pipeline\\prediction_pipeline.py', reloading

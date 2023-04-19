@@ -1,0 +1,3 @@
+[ 2023-04-18 16:06:59,974 ] 224 werkzeug - WARNING -  * Debugger is active!
+[ 2023-04-18 16:06:59,980 ] 224 werkzeug - INFO -  * Debugger PIN: 138-335-787
+[ 2023-04-18 16:07:05,116 ] 224 werkzeug - INFO -  * Detected change in 'D:\\Regression\\app.py', reloading

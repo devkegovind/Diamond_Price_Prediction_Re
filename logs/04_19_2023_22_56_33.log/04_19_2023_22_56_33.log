@@ -1,0 +1,10 @@
+[ 2023-04-19 22:56:34,503 ] 224 werkzeug - WARNING -  * Debugger is active!
+[ 2023-04-19 22:56:34,534 ] 224 werkzeug - INFO -  * Debugger PIN: 115-595-614
+[ 2023-04-19 23:00:34,738 ] 224 werkzeug - INFO - 127.0.0.1 - - [19/Apr/2023 23:00:34] "GET / HTTP/1.1" 200 -
+[ 2023-04-19 23:00:34,867 ] 224 werkzeug - INFO - 127.0.0.1 - - [19/Apr/2023 23:00:34] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[ 2023-04-19 23:00:44,695 ] 224 werkzeug - INFO - 127.0.0.1 - - [19/Apr/2023 23:00:44] "[35m[1mGET /predict HTTP/1.1[0m" 500 -
+[ 2023-04-19 23:00:44,771 ] 224 werkzeug - INFO - 127.0.0.1 - - [19/Apr/2023 23:00:44] "GET /predict?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+[ 2023-04-19 23:00:44,777 ] 224 werkzeug - INFO - 127.0.0.1 - - [19/Apr/2023 23:00:44] "GET /predict?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+[ 2023-04-19 23:00:44,874 ] 224 werkzeug - INFO - 127.0.0.1 - - [19/Apr/2023 23:00:44] "GET /predict?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+[ 2023-04-19 23:00:44,938 ] 224 werkzeug - INFO - 127.0.0.1 - - [19/Apr/2023 23:00:44] "[36mGET /predict?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+[ 2023-04-19 23:01:18,990 ] 224 werkzeug - INFO -  * Detected change in 'D:\\Regression\\app.py', reloading

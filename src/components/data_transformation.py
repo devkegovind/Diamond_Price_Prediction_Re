@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 import pickle
 from src.utils import save_object
+from src.components.data_ingestion import DataIngestion
 
 from sklearn.impute import SimpleImputer ## HAndling Missing Values
 from sklearn.preprocessing import StandardScaler # HAndling Feature Scaling

@@ -1,0 +1,5 @@
+[ 2023-04-18 16:05:50,276 ] 224 werkzeug - WARNING -  * Debugger is active!
+[ 2023-04-18 16:05:50,276 ] 224 werkzeug - INFO -  * Debugger PIN: 138-335-787
+[ 2023-04-18 16:06:27,209 ] 224 werkzeug - INFO - 127.0.0.1 - - [18/Apr/2023 16:06:27] "GET / HTTP/1.1" 200 -
+[ 2023-04-18 16:06:27,242 ] 224 werkzeug - INFO - 127.0.0.1 - - [18/Apr/2023 16:06:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[ 2023-04-18 16:06:58,506 ] 224 werkzeug - INFO -  * Detected change in 'D:\\Regression\\app.py', reloading
